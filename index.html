@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> To do list </title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bootstrap.css">
+
+</head>
+
+<body>
+<div class="container">
+	<div class="heading">
+			<h1> To do list </h1>
+			<h6>"An idiot with a plan can beat a genius without a plan" -- Warren Buffett</h6>
+	</div>
+	<div class="addingpart">
+		
+			<input type="text" id="myinput" placeholder="What`s your plan today?.........">
+
+		<button id="addme" class="buttonn"><a>Add</a>   </button>
+
+	</div>
+
+	<div class="mylist">
+		<ul id="ulul" class="ultapalta"></ul>
+	</div>
+	<div id="save" class="savebutton">
+
+		<button class="buttonn" id="save2"> <a>save</a> </button>
+
+	</div>
+	
+
+</div>
+
+<script>
+let mylistfinal=[];
+let mylist=[];
+let ulladanga=document.querySelector("ul");
+function limkerinitial(kotha){
+	const licre=document.createElement("li");
+	licre.textContent=kotha;
+	const butam=document.createElement("button");
+	butam.textContent="Delete";
+	butam.textContent.Style="text-align:center;padding:10px;";
+	licre.className="liele"
+	butam.className="buttontip"
+	//licre.style="color:red;margin:10px"
+	butam.style="background-color:gray;border-style:none;margin:10px;"
+	licre.appendChild(butam);
+	ulladanga.appendChild(licre);
+	
+	//delete button er kaj
+	butam.addEventListener("click",function(){
+			
+			//let mydata=JSON.parse(localStorage.getItem("items"));
+				let j=0;
+				while(j<mylist.length){
+					if(mylist[j]==licre.firstChild.textContent){
+					
+						//const ind=mydata.indexOf(mydata[j]);//mydata[j] er index ber kre niche splice a j er jaogai dia dile hua uchit
+						
+						mylist.splice(j,1);
+						
+						break;
+					}
+					else{
+					/*
+					console.log(mydata.indexOf(amarinput))
+					console.log(lil.firstChild.textContent)
+					console.log(mydata[j])
+					*/
+					}
+						j++;
+				}
+				console.log(mylist)
+			//localStorage.clear();
+			licre.remove();
+			//localStorage.setItem("items",JSON.stringify(mydata));
+		})
+	
+}
+
+if((localStorage.length>=1)&&(mylist.length===0)){
+	console.log("kisu value web page a send kra dorkar")
+	let datashak=JSON.parse(localStorage.getItem("items"));
+	console.log(datashak);
+	let y=0;
+	while(y<datashak.length){
+		limkerinitial(datashak[y]);
+		y++;
+	}
+	mylist=datashak;
+}
+else{
+	console.log("no value");
+}
+
+	/*
+	// Loads stored tasks
+  document.addEventListener('DOMContentLoaded', loadTasks);
+  // Load tasks from local storage on page start
+function loadTasks() {
+  //let mylist;
+  if (localStorage.getItem('items') === null) {
+    mylist = [];
+  } else {
+    mylist = JSON.parse(localStorage.getItem('tasks'));
+	let x=0;
+  while(x<mylist.length){
+  let la=document.createElement("li")
+		a.textContent=mylist[x];
+		const butt=document.createElement("button")
+		butt.textContent="delete";
+		la.style="color:red;margin:10px"
+		//button k attach kre dilam li er sathe
+		la.appendChild(butt);
+		//tarpor li k send krsi html page
+		const u1=document.getElementById("ulul");
+		
+		u1.appendChild(la);
+		x++;
+}
+  }
+  
+}
+	*/
+	
+	
+	
+	const add= document.getElementById("addme");
+	add.addEventListener("click",function(){
+	
+		let amarinput=document.getElementById("myinput").value;
+	
+		mylist.push(amarinput);
+		
+		console.log(mylist)
+		//localStorage.setItem("items",JSON.stringify(mylist));
+		
+		
+		//creting a li & button element to hold and delete the data and send that to ul in html page
+		let lil=document.createElement("li")
+		lil.textContent=amarinput;
+		lil.className="liele"
+		const but=document.createElement("button")
+		but.textContent="delete";
+		but.className="buttontip"
+		//delte button er ekto kaj kra lageb
+		but.addEventListener("click",function(){
+			
+			//let mydata=JSON.parse(localStorage.getItem("items"));
+				let j=0;
+				while(j<mylist.length){
+					if(mylist[j]==lil.firstChild.textContent){
+					
+						//const ind=mydata.indexOf(mydata[j]);//mydata[j] er index ber kre niche splice a j er jaogai dia dile hua uchit
+						
+						mylist.splice(j,1);
+						
+						break;
+					}
+					else{
+					/*
+					console.log(mydata.indexOf(amarinput))
+					console.log(lil.firstChild.textContent)
+					console.log(mydata[j])
+					*/
+					}
+						j++;
+				}
+				console.log(mylist)
+			//localStorage.clear();
+			lil.remove();
+			//localStorage.setItem("items",JSON.stringify(mydata));
+		})
+		
+		//li & button er halka design jeta ai khanei kra lagbe
+		but.style="background-color:gray;margin:10px;"
+		//lil.style="color:red;margin:10px"
+		//button k attach kre dilam li er sathe
+		lil.appendChild(but);
+		//tarpor li k send krsi html page
+		const u=document.getElementById("ulul");
+		
+		u.appendChild(lil);
+		
+		document.getElementById("myinput").value="";
+	})
+	
+	
+	//sending the data to local storage with clicking the save button
+		const save=document.getElementById("save");
+		save.addEventListener("click",function(){
+			localStorage.setItem("items",JSON.stringify(mylist));
+			
+		
+		
+		})
+		
+	
+	
+	
+	
+</script>
+
+</body>
+</html>
